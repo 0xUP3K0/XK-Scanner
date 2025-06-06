@@ -78,8 +78,18 @@ Dieser Code implementiert einen Netzwerk-Scanner für das **LilyGo EPD-47 e-Ink 
 - Display wird nach jedem Scan ausgeschaltet zur Stromersparnis (`epd_poweroff`)
 ## Bedienung
 
-1. Display am PC einstecken und 
+1. Display am PC einstecken und im Arduino IDE "ESP32S3 Dev Module" auswählen
 2. Warten, bis die Initialisierungsmeldungen erscheinen  
 3. Mit **Doppelklick** den Scan-Modus auswählen  
 4. Mit **langem Klick** einen Scan starten  
 5. Ergebnisse werden auf dem Display angezeigt
+
+---
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
