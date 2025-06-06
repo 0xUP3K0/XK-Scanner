@@ -8,8 +8,6 @@ Dieser Code implementiert einen Netzwerk-Scanner für das **LilyGo EPD-47 e-Ink 
 - ESP32 Mikrocontroller
 - Ein physischer Button (`BUTTON_1`) (mit dem Display integriert)
 
----
-
 ## Software-Bibliotheken
 
 - `epd_driver.h` – für das e-Ink Display
@@ -17,8 +15,6 @@ Dieser Code implementiert einen Netzwerk-Scanner für das **LilyGo EPD-47 e-Ink 
 - `BLEDevice.h`, `BLEUtils.h`, `BLEScan.h` – für Bluetooth Low Energy
 - `Button2.h` – für Button-Handling
 - **FiraSans** Schriftarten
-
----
 
 ## Funktionsweise
 
@@ -39,8 +35,6 @@ Dieser Code implementiert einen Netzwerk-Scanner für das **LilyGo EPD-47 e-Ink 
   - **Scan-Intervall:** 100 ms
   - **Scan-Fenster:** 99 ms  
 
----
-
 ## Hauptfunktionen
 
 ### 1. WLAN-Scan (`wifiScan()`)
@@ -60,14 +54,10 @@ Dieser Code implementiert einen Netzwerk-Scanner für das **LilyGo EPD-47 e-Ink 
   - Signalstärke (RSSI) mit Qualitätsbewertung (*excellent/average/poor*)
 - **Automatischer Seitenumbruch** bei vollem Display
 
----
-
 ## Button-Steuerung
 
 - **Doppelklick:** Wechselt zwischen WLAN- und Bluetooth-Scan-Modus  
 - **Langer Klick:** Führt einen neuen Scan im aktuellen Modus durch  
-
----
 
 ## Display-Ausgabe
 
@@ -77,12 +67,10 @@ Dieser Code implementiert einen Netzwerk-Scanner für das **LilyGo EPD-47 e-Ink 
 ## Bedienung
 
 1. Display am PC einstecken und im Arduino IDE "ESP32S3 Dev Module" auswählen
-2. Warten, bis die Initialisierungsmeldungen erscheinen  
-3. Mit **Doppelklick** den Scan-Modus auswählen  
-4. Mit **langem Klick** einen Scan starten  
+2. Warten, bis die Initialisierungsmeldungen erscheinen
+3. Mit **Doppelklick** den Scan-Modus wechseln
+4. Mit **langem Klick** einen Scan starten
 5. Ergebnisse werden auf dem Display angezeigt
-
----
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
