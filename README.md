@@ -72,6 +72,8 @@ Dies ist ein Netzwerk-Scanner für das **LilyGo EPD-47 e-Ink Display**, der sowo
 4. Mit **langem Klick** einen Scan starten
 5. Ergebnisse werden auf dem Display angezeigt
 
+---
+
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
