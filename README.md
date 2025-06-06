@@ -1,6 +1,6 @@
-# Einführung
+# XK Scanner
 
-Dieser Code implementiert einen Netzwerk-Scanner für das **LilyGo EPD-47 e-Ink Display**, der sowohl **WLAN-** als auch **Bluetooth-Geräte** in der Umgebung erkennen und anzeigen kann. Die Bedienung erfolgt über einen Button, mit dem Scans durchgeführt werden können und zwischen den Scan-Modi gewechselt werden kann.
+Dies ist ein Netzwerk-Scanner für das **LilyGo EPD-47 e-Ink Display**, der sowohl **WLAN-** als auch **Bluetooth-Geräte** in der Umgebung erkennen und anzeigen kann. Die Bedienung erfolgt über einen Button, mit dem Scans durchgeführt werden können und zwischen den Scan-Modi gewechselt werden kann.
 
 ## Hardware-Voraussetzungen
 
