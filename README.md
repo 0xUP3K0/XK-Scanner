@@ -1,9 +1,9 @@
 # Einführung
+
 Dieser Code implementiert einen Netzwerk-Scanner für das **LilyGo EPD-47 e-Ink Display**, der sowohl **WLAN-** als auch **Bluetooth-Geräte** in der Umgebung erkennen und anzeigen kann. Die Bedienung erfolgt über einen Button, mit dem Scans durchgeführt werden können und zwischen den Scan-Modi gewechselt werden kann.
 
----
-
 ## Hardware-Voraussetzungen
+
 - LilyGo EPD-47 Board mit e-Ink Display
 - ESP32 Mikrocontroller
 - Ein physischer Button (`BUTTON_1`) (mit dem Display integriert)
