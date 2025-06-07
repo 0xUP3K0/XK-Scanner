@@ -89,19 +89,19 @@ void wifiScan() {
       if (WiFi.RSSI(i) >= -60) {
         sprintf(buf, "%2d:   %-20s                        %2d (good)                         %-8s",
                 i + 1,
-                WiFi.SSID(i).substring(0, 9).c_str(),
+                WiFi.SSID(i).substring(0, 12).c_str(),
                 WiFi.RSSI(i),
                 encType);
       } else if (WiFi.RSSI(i) >= -80 && WiFi.RSSI(i) < -60) {
-        sprintf(buf, "%2d:   %-20s                        %2d (medium)                       %-8s",
+        sprintf(buf, "%2d:   %-20s                        %2d (mid)                       %-8s",
                 i + 1,
-                WiFi.SSID(i).substring(0, 9).c_str(),
+                WiFi.SSID(i).substring(0, 12).c_str(),
                 WiFi.RSSI(i),
                 encType);
       } else {
         sprintf(buf, "%2d:   %-20s                        %2d (bad)                          %-8s",
                 i + 1,
-                WiFi.SSID(i).substring(0, 9).c_str(),
+                WiFi.SSID(i).substring(0, 12).c_str(),
                 WiFi.RSSI(i),
                 encType);
       }
