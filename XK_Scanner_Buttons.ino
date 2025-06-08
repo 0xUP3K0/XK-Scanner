@@ -1,3 +1,10 @@
+// XK-Scanner (IS221017 & IS221043)
+// WiFi & BLE Scanner auf E-Ink Display (LilyGo ESP32-S3)
+// ----------------------------------------------------------
+// Das Programm scannt für WLAN und Bluetooth-Geräte in der Umgebung und wechselt per Knopfdruck zwischen den Scans.
+// Ergebnisse werden auf dem 4.7" E-Ink Display angezeigt.
+// Die Modi können per Doppelklick gewechselt und der aktuelle Scan durch Langklick (neu-)gestartet werden.
+
 #include <Arduino.h>
 #include "epd_driver.h"
 #include "FiraSans.h"
@@ -9,7 +16,6 @@
 #include <BLEAdvertisedDevice.h>
 #include "Button2.h"
 
-
 uint8_t* framebuffer = NULL;
 char buf[128];
 #define MAX_LINES 9
@@ -17,14 +23,17 @@ char buf[128];
 BLEScan* pBLEScan;
 int bleScanTime = 5;
 
-// Buttons
+// Buttons initialisieren
+// 1 = WiFi-Scan, 2 = BLE-Scan
 Button2 btn1(BUTTON_1);
 int scan_mode = 1;
 
+// Langklick: wiederholt den aktuellen Scan
 void rescan(Button2& b) {
   displayInfo();
 }
 
+// Button Doppelklick: Scanmodus wechseln
 void handler(Button2& b) {
   switch (btn1.getType()) {
     case double_click:
@@ -53,6 +62,7 @@ void displayInfo() {
   epd_poweroff();
 }
 
+// Durchführung und Ausgabe des WiFi-Scanners
 void wifiScan() {
   epd_poweron();
   epd_clear();
@@ -64,7 +74,7 @@ void wifiScan() {
 
   float duration = 0;
 
-  writelnWithSpacing("➸ Scanning for WiFi networks in your area...", &cursor_x, &cursor_y);
+  writelnWithSpacing("[/] Scanning for WiFi networks in your area...", &cursor_x, &cursor_y);
 
   int n = WiFi.scanNetworks();
   if (n == 0) {
@@ -122,11 +132,14 @@ void wifiScan() {
     float end = millis();
     duration = end - start;
 
-    String scan_done = "➸ WiFi Scan completed in " + String(duration / 1000) + " seconds.";
+    String scan_done = "[+] WiFi-Scan completed in " + String(duration / 1000) + " seconds.";
     writelnWithSpacing(scan_done.c_str(), &cursor_x, &cursor_y);
+
+    epd_poweroff_all();
   }
 }
 
+// Durchführung und Ausgabe des Bluetooth-Scanners
 void bluetoothScan() {
   epd_poweron();
   epd_clear();
@@ -137,7 +150,7 @@ void bluetoothScan() {
   float duration = 0;
 
 
-  writelnWithSpacing("➸ Scanning for Bluetooth devices in your area...", &cursor_x, &cursor_y);
+  writelnWithSpacing("[/] Scanning for Bluetooth devices in your area...", &cursor_x, &cursor_y);
 
   BLEScanResults foundDevices = pBLEScan->start(bleScanTime, false);
   int deviceCount = foundDevices.getCount();
@@ -206,7 +219,7 @@ void bluetoothScan() {
 
     duration = millis() - start;
 
-    String scan_done = "➸ BLE Scan completed in " + String(duration / 1000) + " seconds.";
+    String scan_done = "[+] BLE-Scan completed in " + String(duration / 1000) + " seconds.";
     writelnWithSpacing(scan_done.c_str(), &cursor_x, &cursor_y);
 
     pBLEScan->clearResults();
@@ -214,6 +227,7 @@ void bluetoothScan() {
   }
 }
 
+// Intialisierung des Displays & Scan-Komponenten
 void setup() {
   Serial.begin(115200);
   epd_init();
@@ -235,8 +249,7 @@ void setup() {
   int32_t cursor_y = 40;
 
   writelnWithSpacingStart("➸ Welcome To The XK Scanner!", &cursor_x, &cursor_y);
-  writelnWithSpacingStart("➸ Initializing scanners...", &cursor_x, &cursor_y);
-  writelnWithSpacingStart("", &cursor_x, &cursor_y);
+  writelnWithSpacingStart("[-] Initializing scanners...", &cursor_x, &cursor_y);
 
   // Initializing the WiFi Scanner
   WiFi.mode(WIFI_STA);
@@ -253,16 +266,22 @@ void setup() {
   pBLEScan->setWindow(99);
 
   writelnWithSpacingStart("[+] BLE Scanner successfully initialized!", &cursor_x, &cursor_y);
-  writelnWithSpacingStart("", &cursor_x, &cursor_y);
-  writelnWithSpacingStart("➸ Press the button to begin scanning...", &cursor_x, &cursor_y);
+  writelnWithSpacing("", &cursor_x, &cursor_y);
+  writelnWithSpacingStart("[-] Usage:", &cursor_x, &cursor_y);
+  writelnWithSpacingStart("[+] Double-Press: Switch scanning modes.", &cursor_x, &cursor_y);
+  writelnWithSpacingStart("[+] Long-Press: Restart current scan.", &cursor_x, &cursor_y);
+  writelnWithSpacing("", &cursor_x, &cursor_y);
+  writelnWithSpacingStart("➸ Press the button to start scanning...", &cursor_x, &cursor_y);
 }
 
+// Veränderung der Schriftart und Zeilenabstand vom Startbildschirm
 void writelnWithSpacingStart(const char* text, int32_t* x, int32_t* y) {
   writeln((GFXfont*)&FiraSans, text, x, y, NULL);
   *y += ((GFXfont*)&FiraSans)->advance_y + 5;
   *x = 20;
 }
 
+// Veränderung der Schriftart und Zeilenabstand von der Ausgabe
 void writelnWithSpacing(const char* text, int32_t* x, int32_t* y) {
   writeln((GFXfont*)&FiraSansBook12pt, text, x, y, NULL);
   *y += ((GFXfont*)&FiraSansBook12pt)->advance_y + 5;
