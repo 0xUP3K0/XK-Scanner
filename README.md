@@ -55,7 +55,7 @@ Dies ist ein Netzwerk-Scanner für das **LilyGo EPD-47 e-Ink Display**, der sowo
 - **Automatischer Seitenumbruch** bei vollem Display
 
 ## Button-Steuerung
-
+Button (SENSOP_VN)
 - **Doppelklick:** Wechselt zwischen WLAN- und Bluetooth-Scan-Modus  
 - **Langer Klick:** Führt einen neuen Scan im aktuellen Modus durch  
 
