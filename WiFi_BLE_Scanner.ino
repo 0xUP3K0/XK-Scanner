@@ -1,5 +1,5 @@
 // XK-Scanner (IS221017 & IS221043)
-// WiFi & BLE Scanner auf E-Ink Display (LilyGo ESP32-S3)
+// WiFi & BLE Scanner auf E-Ink Display (LilyGo 4.7 Inch ESP32-S3 Development Driver Board)
 // ----------------------------------------------------------
 // Das Programm scannt für WLAN und Bluetooth-Geräte in der Umgebung und wechselt per Knopfdruck zwischen den Scans.
 // Ergebnisse werden auf dem 4.7" E-Ink Display angezeigt.
@@ -27,7 +27,6 @@ int bleScanTime = 5;
 float path_loss = 10;
 
 // Buttons initialisieren
-// 1 = WiFi-Scan, 2 = BLE-Scan
 Button2 btn1(BUTTON_1);
 int scan_mode = 1;
 
@@ -36,7 +35,7 @@ void rescan(Button2& b) {
   displayInfo();
 }
 
-// Button Doppelklick: Scanmodus wechseln
+// Doppelklick: Scanmodus wechseln (default: WiFi-Scan)
 void handler(Button2& b) {
   switch (btn1.getType()) {
     case double_click:
@@ -250,7 +249,7 @@ void bluetoothScan() {
   }
 }
 
-// Intialisierung des Displays & Scan-Komponenten
+// Intialisierung des Displays & der Scan-Komponenten
 void setup() {
   Serial.begin(115200);
   epd_init();
@@ -274,14 +273,14 @@ void setup() {
   writelnWithSpacingStart("➸ Welcome To The XK Scanner!", &cursor_x, &cursor_y);
   writelnWithSpacingStart("[-] Initializing scanners...", &cursor_x, &cursor_y);
 
-  // Initializing the WiFi Scanner
+  // Initialisierung des WiFi-Scanners
   WiFi.mode(WIFI_STA);
   WiFi.disconnect();
   delay(100);
 
   writelnWithSpacingStart("[+] WiFi Scanner succesfully initialized!", &cursor_x, &cursor_y);
 
-  // Initializing the BLE Scanner
+  // Initialisierung des BLE-Scanners
   BLEDevice::init("");
   pBLEScan = BLEDevice::getScan();
   pBLEScan->setActiveScan(true);
